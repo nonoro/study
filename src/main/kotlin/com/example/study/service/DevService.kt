@@ -1,8 +1,15 @@
 package com.example.study.service
 
-class DevService : MyService {
+import io.github.oshai.kotlinlogging.KotlinLogging
+
+private val log = KotlinLogging.logger {}
+
+class DevService(
+    private val message: String
+) : MyService {
     override fun get() {
-        println("DevService 입니다")
+        log.info { "DevService 입니다" }
+        log.info { "message: $message" }
     }
 
     override fun save(information: String) {

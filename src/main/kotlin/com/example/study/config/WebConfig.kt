@@ -24,8 +24,8 @@ class WebConfig : WebMvcConfigurer {
     @Bean
     fun myService(): MyService {
         return when (environment) {
-            "dev" -> DevService()
-            "prod" -> ProdService()
+            "dev" -> DevService("개발환경")
+            "prod" -> ProdService("운영환경")
             else -> throw IllegalArgumentException("존재하지 않는 환경입니다: $environment")
         }
     }
