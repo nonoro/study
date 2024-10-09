@@ -27,4 +27,33 @@ class EqualsTest {
             { assertThat(person1.age == person3.age).isTrue() } // 나이 비교
         )
     }
+
+    @DisplayName("엔티티 동일성 테스트")
+    @Test
+    fun `엔티티의 동일성 검사`() {
+        data class User(
+            val id: Long,
+            val name: String,
+            val email: String
+        ) {
+            // 식별자를 사용한 동일성 판단
+            override fun equals(other: Any?): Boolean {
+                if (this === other) return true
+                if (other !is User) return false
+
+                return id == other.id // id가 동일한지 확인
+            }
+
+            override fun hashCode(): Int {
+                return id.hashCode()
+            }
+        }
+
+        val user1 = User(1, "김영철", "kim@example.com")
+        val user2 = User(1, "홍길동", "hong@example.com")
+        val user3 = User(2, "김영철", "kim@example.com")
+
+        assertThat(user1 == user2).isTrue() // true: 동일한 id를 가짐
+        assertThat(user1 == user3).isFalse() // false: 다른 id를 가짐
+    }
 }
