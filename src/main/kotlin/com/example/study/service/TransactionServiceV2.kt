@@ -7,18 +7,12 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 
 @Service
-class TransactionService {
+class TransactionServiceV2 {
 
     @Transactional
     fun transactionIsTrue() {
         println("트랜잭션 적용된 메서드 호출")
         logTransactionStatus()
-    }
-
-    fun transactionIsFalse() {
-        println("트랜잭션이 적용되지 않은 메서드 호출")
-        logTransactionStatus()
-        transactionIsTrue()
     }
 
     private fun logTransactionStatus() {
